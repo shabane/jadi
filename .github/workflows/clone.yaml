@@ -1,0 +1,34 @@
+name: clone-jadi.net
+
+on: 
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  cloning:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Installing httrack
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y httrack
+
+      - name: create new dir
+        run: mkdir docs
+
+      - name: Clone using httrack
+        run: |
+          httrack https://jadi.net -O ./docs -c
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "Update website content from jadi.net [${{ github.event.time }}]"
+          git push origin HEAD:main
+
