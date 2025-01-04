@@ -12,14 +12,14 @@ jobs:
       - name: Installing httrack
         run: |
           sudo apt-get update
-          sudo apt-get install -y httrack
+          sudo apt-get install -y wget
 
       - name: create new dir
         run: mkdir docs
 
       - name: Clone using httrack
         run: |
-          httrack https://jadi.net -O ./docs -c -m154857600 -v -E 21600
+          wget --mirror --convert-links --adjust-extension --page-requisites --no-parent https://jadi.net/ -P ./docs
 
       - name: Checkout repository
         uses: actions/checkout@v3
