@@ -19,7 +19,7 @@ jobs:
 
       - name: Clone using httrack
         run: |
-          httrack https://jadi.net -O ./docs -c -m154857600 -v
+          httrack https://jadi.net -O ./docs -c -m154857600 -v -E 21600
 
       - name: Checkout repository
         uses: actions/checkout@v3
