@@ -3,7 +3,7 @@ name: clone-jadi.net
 on: 
   push: 
     branches:
-      - master
+      - fake
 jobs:
   cloning:
     runs-on: ubuntu-latest
